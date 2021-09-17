@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
-import {View, Text, SafeAreaView, StyleSheet, TouchableOpacity, Image, FlatList} from 'react-native';
-import { ButtonAddContact, CardContact } from '../../component';
-import { getData } from '../../service/AxiosContact';
+import { SafeAreaView, StyleSheet, TouchableOpacity, Image, FlatList} from 'react-native';
+import { CardContact, FooterCardContact } from '../../component';
 import {useDispatch, useSelector} from 'react-redux';
 import { fetchContact, resetForm, setContactForm } from '../../redux/contact/action';
 
@@ -24,15 +23,12 @@ function Home({navigation}) {
         dispatch(fetchContact());
     } 
 
-    const fetchAllContact = () => {
-        setLoading(true);
-        getData();
-    }
 
     useEffect(() => {
-        // dispatch(fetchContact);
-        loadData();
-    }, [])
+        if(state.dataContact.length <= 0){   
+            dispatch(fetchContact());
+        }
+    }, [state.dataContact])
 
     const addContact = () => {
         dispatch(resetForm())
@@ -41,23 +37,15 @@ function Home({navigation}) {
 
 
     return (
-        <SafeAreaView style={{flex:1, backgroundColor: 'white', paddingHorizontal: 16, paddingVertical: 10}}>
-
-          
+        <SafeAreaView style={{flex:1, backgroundColor: 'white', paddingHorizontal: 16, paddingVertical: 10}}>        
 
             <FlatList
-                onEndReached ={loadData}
-                onEndReachedThreshold = {0.5}
+                ListFooterComponent = {<FooterCardContact/>}
                 data= {state.dataContact}
                 renderItem= {RenderedContact}
                 keyExtractor= {(item, index) => index.toString()} 
             />
-           
-
-
-
-
-            
+                       
 
             <TouchableOpacity
                     style={styles.touchableOpacityStyle}
@@ -67,7 +55,6 @@ function Home({navigation}) {
                     source={require('../../image/icon-plus.png')}
                 />
             </TouchableOpacity> 
-            {/* <ButtonAddContact onPress= {()=> addContact()}   /> */}
             
         </SafeAreaView>
        

@@ -5,6 +5,7 @@ import ButtonRed from "./ButtonRed";
 import ButtonAddContact from "./ButtonAddContact";
 import CardContact from "./CardContact";
 import Loading from "./Loading";
+import FooterCardContact from "./FooterCardContact";
 
 export {
     Label,
@@ -13,5 +14,6 @@ export {
     ButtonRed,
     ButtonAddContact,
     CardContact,
-    Loading
+    Loading,
+    FooterCardContact
 }

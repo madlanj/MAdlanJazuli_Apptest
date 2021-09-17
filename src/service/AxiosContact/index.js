@@ -1,18 +1,19 @@
-import ApiClientApp from "../../config/axios";
+import axios from 'axios';
+const API = 'https://simple-contact-crud.herokuapp.com';
 
 const getData = async() => {
-    return ApiClientApp.get('/contact')
+    return axios.get(API+'/contact')
     .then(resp => {
         if(resp)
            {return resp.data}
            return false
     })
-    .catch( err => console.log(err))
+    .catch( err => console.log(err+'test'))
     
 };
 
 const createContact = async(form) => {
-    return ApiClientApp.post('/contact' , {
+    return axios.post(API+'/contact' , {
         firstName: form.firstName,
 	    lastName: form.lastName,
 	    age: form.age,
@@ -28,7 +29,7 @@ const createContact = async(form) => {
 }
 
 const updateContact = async(form, id) => {
-    return ApiClientApp.put('/contact/'+id , {
+    return axios.put(API+'/contact/'+id , {
         firstName: form.firstName,
 	    lastName: form.lastName,
 	    age: form.age,
@@ -42,8 +43,8 @@ const updateContact = async(form, id) => {
     .catch( err => console.log(err))      
 }
 
-const deleteContact = async(form, id) => {
-    return ApiClientApp.delete('/contact/'+id)
+const deleteContact = async(id) => {
+    return axios.delete(API+'/contact/'+id)
     .then(resp => {
         if(resp)
            {return resp.data}

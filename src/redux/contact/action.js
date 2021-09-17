@@ -1,15 +1,12 @@
 
 import { 
     SET_LOADING, 
-    SET_PAGE, 
-    SET_CARI, 
     SET_FORM, 
     RESET_FORM , 
-    SET_PRODUCT_FORM, 
-    SET_TOTAL_PAGE,
     SET_DATA_CONTACT,
     RESET_DATA_CONTACT,
-    SET_CONTACT_FORM} 
+    SET_CONTACT_FORM
+} 
     from "./constanst"
 import * as RootNavigation from '../../config/RootNavigation'
 import { Alert } from "react-native";
@@ -79,7 +76,7 @@ export const destroyContact = (id) => {
         let form = getState().contact.form || {};
         dispatch(setLoading(true))
         try {
-            let data = await deleteContact(form, id)
+            let data = await deleteContact(id)
             console.log(form.id)
             if(data.message == 'contact deleted')
             {
@@ -103,19 +100,7 @@ export const setLoading = loading => {
         loading,
     }
 }
-export const setPage = page =>{
-    return {
-        type: SET_PAGE,
-        page
-    }
-}
 
-export const setCari = cari =>{
-    return {
-        type: SET_CARI,
-        cari
-    }
-}
 
 export const setDataContact = dataContact =>{
     return {
@@ -143,12 +128,6 @@ export const  setForm = (field, value) => {
         value
     }
 }
-export const setProductForm = (form) => {
-    return{
-        type: SET_PRODUCT_FORM,
-        form
-    }
-}
 
 export const setContactForm = (form) => {
     return{
@@ -157,10 +136,3 @@ export const setContactForm = (form) => {
     }
 }
 
-export const setTotalPage = totalPage =>
-{
-    return{
-        type : SET_TOTAL_PAGE,
-        totalPage
-    }
-}
